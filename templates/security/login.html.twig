@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			Login
+		</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Lato:200,300,400,500,600,700,800,900,1000&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap.min.css">
+		<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+	</head>
+
+	<body>
+	<section class="wrapper" id="home_dashboard">
+			 <div class="container-fluid" style="background-image:url({{ asset('images/fond_accueil_prelogin.jpg') }})">
+			 	<div class="header">
+					<h3>DASHBOARD</h3>
+				</div>
+				<div class="ligne"></div>
+			 	<div class="button_liste">
+					<div class="background-button" id="div_shadow_tropical_wood">
+						<a href="#" class="link_logo">
+							<div class="img_content" data-log="authentification_tw">
+								<img src="{{ asset('images/bouton_tropical_wood.png') }}" class="img-responsive" alt="">
+							</div>
+						</a>
+					</div>
+					<div class="background-button" id="div_shadow_sounds">
+						<a href="#" class="link_logo">
+							<div class="img_content" data-log="authentification_s">
+								<img src="{{ asset('images/bouton_sounds.png') }}" class="img-responsive" alt="">
+							</div>
+						</a>
+					</div>
+				</div>
+			 </div>
+		</section>
+
+		<section class="wrapper" id="authentification_s" style="display:none">
+			<div class="container-fluid">
+				<div class="col-lg-6 col-md-6 col-sm-6" style="background-image: url({{ asset('images/login.png') }});">
+
+					<div class="fond_gauche"></div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<div class="row">
+						<div class="grand_titre_si">
+							<div class="bg_titre">
+								<span>SOUND'S</span>
+							</div>
+							<div class="sm_titre">
+								<span>HOTELS GROUP</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="div_parag">
+							<p>Veuillez vous connecter ici.</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form">
+							<form method="post" id="form_sounds">
+								<div class="form-group">
+									<span class="span__label"></span>
+									<input type="email" name="email" data-placeholder="Adresse mail" id="mail_s" class="form-control" value="{{ last_username }}" placeholder="Adresse mail">
+
+
+								</div>
+								<div class="form-group">
+									<span class="span__label"></span><input type="password" id="password_s" class="form-control" name="password" data-placeholder="Password" placeholder="Password">
+									<input type="hidden" value="sounds" name="groupe">
+								</div>
+								<div class="form-group div__check">
+									<input type="checkbox" id="remember_me_s" name="_remember_me" value="remember">
+									
+									<label for="remember_me_s">Se souvenir de moi</label>
+									<a href="{{ path('forgot_password') }}" class="link_forgot_pass">
+										<span>Mot de passe oublié</span>
+									</a>
+								</div>
+								{% if error %}
+									<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+								{% endif %}
+								<input
+								type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+								{#
+									Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+									See https://symfony.com/doc/current/security/remember_me.htmlklk
+
+									<div class="checkbox mb-3">
+										<label>
+											<input type="checkbox" name="_remember_me"> Remember me
+										</label>
+									</div>
+								#}
+								<div id="info_log_sounds">
+									<p>lorem dfhlk qsdhgkl </p>
+								</div>
+								<div class="form-group last_iput">
+									<button type="submit" id="btn_login_s" class="btn_login btn btn-md" name=""><span>Se connecter</span></button>
+									<a href="{{ path('app_login') }}" class="btn btn-md btn_si" id="retour_sounds"><span class="fa fa-angle-double-left"></span>Retour</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{# login tropical wood #}
+		<section class="wrapper" id="authentification_tw" style="display:none">
+			<div class="container-fluid">
+				<div class="col-lg-6 col-md-6 col-sm-6" style="background-image: url({{ asset('images/fond_login_tropical_wood_leger.jpg') }});">
+
+					<div class="fond_gauche"></div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<div class="row">
+						<div class="logo_login">
+							<img src="{{ asset('images/tropical.png') }}" alt="logo">
+						</div>
+					</div>
+					<div class="row">
+						<div class="div_parag">
+							<p>Veuillez vous connecter ici.</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form">
+							<form method="post" id="form_tw">
+								<div class="form-group">
+									<span class="span__label span__label_tw"></span>
+									<input type="email" name="email" data-placeholder="Adresse mail" id="mail_tw" class="form-control"  value="{{ last_username }}" placeholder="Adresse mail">
+								</div>
+								<div class="form-group">
+									<span class="span__label span__label_tw"></span>
+									<input type="password" class="form-control" id="password_tw" name="password" data-placeholder="Password" placeholder="Password">
+									<input type="hidden" value="tropical_wood" name="groupe">
+								</div>
+								<div class="form-group div__check">
+									<input type="checkbox" class="remember_me_tw" id="remember_me_tw" name="_remember_me" value="remember">
+									<label for="remember_me_tw">Se souvenir de moi</label>
+									<a href="{{ path('forgot_password') }}" class="link_forgot_pass">
+										<span>Mot de passe oublié</span>
+									</a>
+								</div>
+								{% if error %}
+									<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+								{% endif %}
+								<input
+								type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+								{#
+																	Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+																	See https://symfony.com/doc/current/security/remember_me.html
+								
+																	<div class="checkbox mb-3">
+																		<label>
+																			<input type="checkbox" name="_remember_me"> Remember me
+																		</label>
+																	</div>
+																#}
+								<div id="info_log_tw">
+									<p>lorem dfhlk qsdhgkl </p>
+								</div>
+								<div class="form-group last_iput">
+									<button type="submit" id="btn_login_tw" class="btn_login btn btn-md login_tropical_wood" name=""><span>Se connecter</span></button>
+									<a href="{{ path('app_login') }}" class="btn btn-md btn_si" id="retour_tw"><span class="fa fa-angle-double-left"></span>Retour</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script src="{{asset('jquery/jquery.min.js')}}"></script>
+
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+			<script>
+				/* pour l'annimation de loader */
+
+
+			$(document).ready(function () {
+				setTimeout(function () {
+				$('body').addClass('loaded');
+				}, 2000);
+			})
+
+			/* fin loader */
+			</script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+			<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+			<script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+			<script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>
+			<script src="https://cdn.datatables.net/responsive/2.2.4/js/responsive.bootstrap.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+			<script src='{{ asset('js/currency.js') }}'></script>
+			<script src='{{ asset('js/dashboard.js') }}'></script>
+			<script>
+
+					/*animation des input  */
+
+					$(document).ready(function () {
+						$("input[placeholder]").on({
+							focus: function () {
+							$(this).parent().children(".span__label").text($(this).attr('placeholder'));
+							$(this).attr('placeholder', ' ');
+							$(this).css("border-color", "#d29e00");
+						},
+						blur: function () {
+							var t = $(this).attr('data-placeholder');
+							$(this).attr('placeholder', t);
+							$(this).parent().children(".span__label").text("");
+							$(this).css("border-color", "#e2e3e6");
+							}
+						})
+						
+						// annimation pour les choix de login 
+						$('.img_content').on('click', function(ev){
+							ev.preventDefault();
+							var data_log = $(this).attr('data-log');
+							//alert(data_log);
+							$('#home_dashboard').slideUp();
+							$('#' + data_log).slideDown();
+						})
+					// login tw
+
+						$("#btn_login_tw").on('click', function(ev){
+							ev.preventDefault();
+							var data = {
+								'mail' 		: $("#mail_tw").val(),
+								'password'	: $("#password_tw").val(),
+							}
+							$.ajax({
+								url 	: "/test_auth_tw",
+								type 	: "POST",
+								data 	: data,
+								beforeSend : function(){
+									$("#btn_login_tw span").text("Patienter...");
+								},
+								success	: function(response){
+									if(response == "oui"){
+										$('#form_tw').submit();
+									}else{
+										$('#info_log_tw p').text("Adresse email introuvable");
+										$('#info_log_tw').fadeIn("slow");
+
+										setTimeout(() => {
+											$('#info_log_tw').fadeOut("slow");
+										}, 3000);
+									}
+								},
+								complete : function(){
+									$("#btn_login_tw span").text("Se connecter");
+								},
+								error	: function(){
+									alert('erreur au niveau de la route test_auth');
+								}
+							})
+						})
+
+						// login sounds
+
+						$("#btn_login_s").on('click', function(ev){
+							ev.preventDefault();
+							var data = {
+								'mail' 		: $("#mail_s").val(),
+								'password'	: $("#password_s").val(),
+							}
+							$.ajax({
+								url 	: "/test_auth_s",
+								type 	: "POST",
+								data 	: data,
+								beforeSend : function(){
+									$("#btn_login_s span").text("Patienter...");
+								},
+								success	: function(response){
+									if(response == "oui"){
+										$('#form_sounds').submit();
+									}else{
+										$('#info_log_sounds p').text("Adresse email introuvable");
+										$('#info_log_sounds').fadeIn("slow");
+
+										setTimeout(() => {
+											$('#info_log_sounds').fadeOut("slow");
+										}, 3000);
+									}
+								},
+								complete : function(){
+									$("#btn_login_s span").text("Se connecter");
+								},
+								error	: function(){
+									alert('erreur au niveau de la route test_auth_s');
+								}
+							})
+						})
+
+					})
+
+					/* / animation des input  */
+
+			</script>
+	</body>
+</html>
+

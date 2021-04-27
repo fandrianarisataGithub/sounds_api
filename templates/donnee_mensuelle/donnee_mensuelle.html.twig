@@ -1,0 +1,522 @@
+{% extends "base.html.twig" %}
+{% block title %}
+	Donnée mensuelle
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/dashboard.css')}}">
+{% endblock %}
+{% block body %}
+    
+    <section
+        id="contents" class="container-fluid">
+        <!-- entete content -->
+        {% include "nav2.html.twig" %}
+        <!-- / entete content -->
+        <div id="hrs_content" class="data_mensuel">
+           {{ form_start(form) }}
+                <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 col-xs-12">
+                    <section class="section_part" id="section_part_top">
+                        <div class="sous_titre">
+                            <h2>Donnée mensuelle</h2>
+                            <div class="block_month">
+                                <select name="donnee_mensuelle_mois" id="donnee_mensuelle_mois">
+                                    <option value="01"
+                                        {% if mois_num == "01" %}
+                                            selected
+                                        {% endif %}
+                                    >JANVIER</option>
+                                    <option value="02"
+                                         {% if mois_num == "02" %}
+                                            selected
+                                        {% endif %}
+                                    >FEVRIER</option>
+                                    <option value="03"
+                                         {% if mois_num == "03" %}
+                                            selected
+                                        {% endif %}
+                                    >MARS</option>
+                                    <option value="04"
+                                         {% if mois_num == "04" %}
+                                            selected
+                                        {% endif %}
+                                    >AVRIL</option>
+                                    <option value="05"
+                                        {% if mois_num == "05" %}
+                                            selected
+                                        {% endif %}
+                                    >MAI</option>
+                                    <option value="06"
+                                         {% if mois_num == "06" %}
+                                            selected
+                                        {% endif %}
+                                    
+                                    >JUIN</option>
+                                    <option value="07"
+                                         {% if mois_num == "07" %}
+                                            selected
+                                        {% endif %}
+                                    >JUILLET</option>
+                                    <option value="08"
+                                         {% if mois_num == "08" %}
+                                            selected
+                                        {% endif %}
+                                    >AOUT</option>
+                                    <option value="09"
+                                         {% if mois_num == "09" %}
+                                            selected
+                                        {% endif %}
+                                    >SEPTEMBRE</option>
+                                    <option value="10"
+                                         {% if mois_num == "10" %}
+                                            selected
+                                        {% endif %}
+                                    >OCTOBRE</option>
+                                    <option value="11"
+                                         {% if mois_num == "11" %}
+                                            selected
+                                        {% endif %}
+                                    >NOVEMBRE</option>
+                                    <option value="12"
+                                         {% if mois_num == "12" %}
+                                            selected
+                                        {% endif %}
+                                    >DECEMBRE</option>
+                                </select>
+                                <select name="donnee_mensuelle_annee" id="donnee_mensuelle_annee">
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        <p>
+                            {{ message }}
+                        </p>
+                    </div>
+                {% endfor %}
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 col-xs-12">
+                    <div class="tab_content" id="data_days">
+                        <div class="h4_titre">
+                            <h4>Stock</h4>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="c_a">Valeur de stock :
+                                </label>
+                                {# <input type="text" maxlength="23" class="input_nombre" id="stock_value"> #}
+                                {{ form_widget(form.stock, {
+                                                                'attr' : {
+                                                                    'class' : 'input_nombre',
+                                                                    
+                                                                    'maxlength' : '23',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar">Ar</span>
+                            </div>
+                        </div>
+                        <div class="h4_titre">
+                            <h4>KPI</h4>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">ADR :
+                                </label>
+                                {# <input type="text" max="100" maxlength="18" class="input_nombre" id="restaurant_value"> #}
+                                {{ form_widget(form.kpi_adr, {
+                                                                'attr' : {
+                                                                    'class' : 'input_nombre',
+                                                                    
+                                                                    'maxlength' : '23',
+                                                                    'max' : '100',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar">Ar</span>
+                            </div>
+                            <div class="form-group">
+                                    <label for=""> RevPAR : 
+                                    </label>
+                                     {{ form_widget(form.kpi_revp, {
+                                         'attr' : {
+                                                        'class' : 'input_nombre',
+                                                        
+                                                        'maxlength' : '23',
+                                                        'max' : '100',
+                                                    }
+                                    }) }}
+                                    {# <input type="text" class="input_pourcent" max="100"> #}
+                                    <span class="span__ar">Ar</span>
+                            </div>
+                        </div>
+                        <div class="h4_titre">
+                            <h4>Cost</h4>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">Restaurant :
+                                </label>
+                                {# <input type="text" max="100" maxlength="18" class="input_nombre" id="restaurant_value"> #}
+                                {{ form_widget(form.cost_restaurant_value, {
+                                                                'attr' : {
+                                                                    'class' : 'input_nombre',
+                                                                    
+                                                                    'maxlength' : '23',
+                                                                    'max' : '100',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar">Ar</span>
+                            </div>
+                            <div class="form-group">
+                                    <label for=""> Taux : 
+                                    </label>
+                                     {{ form_widget(form.cost_restaurant_pourcent, {
+                                        'attr' : {
+                                            'class' : 'input_pourcent',
+                                           
+                                            'max' : '100',
+                                        }
+                                    }) }}
+                                    {# <input type="text" class="input_pourcent" max="100"> #}
+                                    <span class="span__pourcent">%</span>
+                            </div>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">Electricité :
+                                </label>
+                                {# <input type="text" max="100" maxlength="18" class="input_nombre" id="electricite_value"> #}
+                                {{ form_widget(form.cost_electricite_value, {
+                                                                'attr' : {
+                                                                    'class' : 'input_nombre',
+                                                                    
+                                                                    'maxlength' : '23',
+                                                                    'max' : '100',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar">Ar</span>
+                            </div>
+                            <div class="form-group">
+                                    <label for=""> Taux : 
+                                    </label>
+                                     {{ form_widget(form.cost_electricite_pourcent, {
+                                        'attr' : {
+                                            'class' : 'input_pourcent',
+                                           
+                                            'max' : '100',
+                                        }
+                                    }) }}
+                                    {# <input type="text" class="input_pourcent" max="100"> #}
+                                    <span class="span__pourcent">%</span>
+                            </div>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">Eau :
+                                </label>
+                                {# <input type="text" max="100" maxlength="18" class="input_nombre" id="eau_value"> #}
+                                {{ form_widget(form.cost_eau_value, {
+                                                                'attr' : {
+                                                                    'class' : 'input_nombre',
+                                                                    
+                                                                    'maxlength' : '23',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar">Ar</span>
+                            </div>
+                            <div class="form-group">
+                                    <label for=""> Taux : 
+                                    </label>
+                                     {{ form_widget(form.cost_eau_pourcent, {
+                                        'attr' : {
+                                            'class' : 'input_pourcent',
+                                            'max' : '100',
+                                        }
+                                    }) }}
+                                    {# <input type="text" class="input_pourcent" max="100"> #}
+                                    <span class="span__pourcent">%</span>
+                            </div>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">Gasoil :
+                                </label>
+                                {# <input type="text" max="100" maxlength="18" class="input_nombre" id="gasoil_value"> #}
+                                {{ form_widget(form.cost_gasoil_value, {
+                                                                'attr' : {
+                                                                    'class' : 'input_nombre',
+                                                                    
+                                                                    'maxlength' : '23',
+                                                                    'max' : '100',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar">Ar</span>
+                            </div>
+                            <div class="form-group">
+                                    <label for=""> Taux : 
+                                    </label>
+                                     {{ form_widget(form.cost_gasoil_pourcent, {
+                                        'attr' : {
+                                            'class' : 'input_pourcent',
+                                           
+                                            'max' : '100',
+                                        }
+                                    }) }}
+                                    {# <input type="text" class="input_pourcent" max="100"> #}
+                                    <span class="span__pourcent">%</span>
+                            </div>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">Salaire brut :
+                                </label>
+                                {# <input type="text" max="100" maxlength="18" class="input_nombre" id="salaire_brute_value"> #}
+                                {{ form_widget(form.salaire_brute_value, {
+                                                                'attr' : {
+                                                                    'class' : 'input_nombre',
+                                                                    
+                                                                    'maxlength' : '23',
+                                                                    'max' : '100',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar">Ar</span>
+                            </div>
+                            <div class="form-group">
+                                    <label for=""> Taux : 
+                                    </label>
+                                     {{ form_widget(form.salaire_brute_pourcent, {
+                                        'attr' : {
+                                            'class' : 'input_pourcent',
+                                           
+                                            'max' : '100',
+                                        }
+                                    }) }}
+                                    {# <input type="text" class="input_pourcent" max="100"> #}
+                                    <span class="span__pourcent">%</span>
+                            </div>
+                        </div>
+                        <div class="h4_titre">
+                            <h4>Service - Quality - Notation</h4>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">Interne :
+                                </label>
+                                 {# <input type="text" class="input_pourcent" max="100"> #}
+                                {{ form_widget(form.sqn_interne, {
+                                                                'attr' : {
+                                                                    'class' : 'span_inf10',
+                                                                    
+                                                                    'max' : '10',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar "> / 10</span>
+                            </div>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">Booking :
+                                </label>
+                                 {# <input type="text" class="input_pourcent" max="100"> #}
+                                {{ form_widget(form.sqn_booking, {
+                                                                'attr' : {
+                                                                    'class' : 'span_inf10',
+                                                                    'max' : '10',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar "> / 10</span>
+                            </div>
+                        </div>
+                        <div class="data_form">
+                            <div class="form-group">
+                                <label for="n_couvert">Tripadvisor :
+                                </label>
+                                 {# <input type="text" class="input_pourcent" max="100"> #}
+                                {{ form_widget(form.sqn_tripadvisor, {
+                                                                'attr' : {
+                                                                    'class' : 'span_inf5',
+                                                                    
+                                                                    'max' : '5',
+                                                                }
+                                                            }) }}
+                                <span class="span__ar"> / 5</span>
+                            </div>
+                        </div>
+                        <div class="btn-list">
+                            <ul>
+                                <li><button type="submit" id = "btn_add_donnee_mensuelle" class="btn btn-warning"><span>Enregistrer</span></button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            {{ form_end(form) }}
+        </div>
+
+    </section>
+
+
+{% endblock %}
+
+{% block javascripts %}
+<!-- un plugin tres important pour les input -->
+
+<script src="{{ asset('js/cleave.min.js') }}"></script>
+
+
+<script>
+        var inputs = document.querySelectorAll('form input');
+    {% if action == "ajout" %}
+        
+        for (let index = 0; index < inputs.length; index++) {
+            if(inputs[index].getAttribute('id') != "donnee_mensuelle__token"){
+                inputs[index].value = "";
+            }
+        }
+    {% endif %}
+
+    var t =  document.querySelectorAll(".input_pourcent");
+
+    for (let index = 0; index < t.length; index++) {
+        t[index].onkeyup = function(){
+            handleChange(this);
+        }
+    }
+
+    var span_inf5 = document.querySelectorAll(".span_inf5"); 
+    
+    var span_inf10 = document.querySelectorAll(".span_inf10");
+
+    for (let index = 0; index < span_inf5.length; index++) {
+        span_inf5[index].onkeyup = function(){
+            handleChange2(this,5);
+        }
+    }
+
+    for (let index = 0; index < span_inf10.length; index++) {
+        span_inf10[index].onkeyup = function(){
+            handleChange2(this,10);
+        }
+    }
+
+	function handleChange(input) {
+
+        if (input.value < 0) {
+        input.value = 0;
+        } else if (input.value > 100) {
+        input.value = 100;
+        } else if (isNaN(input.value)) {
+        input.value = 0;
+        }
+
+    }
+
+    function handleChange2(input, max) {
+
+        if (input.value < 0) {
+        input.value = 0;
+        } else if (input.value > max) {
+        input.value = max;
+        } else if (isNaN(input.value)) {
+        input.value = 0;
+        }
+
+    }
+</script>
+
+<!-- limiter les  -->
+
+<script>
+
+	 /* utilisation de cleave.js pour les input */
+            // style des % et Ar
+            var n = document.querySelectorAll(".input_nombre");
+            for (var i = n.length - 1; i >= 0; i--) {
+            new Cleave(n[i], { // prefix: 'Ar ',
+            numeral: true,
+            delimiter: [' '],
+            numeralThousandsGroupStyle: 'thousand',
+            numericOnly: true
+            });
+            }
+
+
+/* fin utilisation de cleave.js pour les input */
+
+</script>
+<script>
+
+	$(document).ready(function () {
+        
+        var pseudo_hotel = '{{ hotel }}';
+
+        // liste annee idonnee mensuelle
+        var date = new Date();
+        var annee = date.getFullYear();
+        var annee_prec = annee - 1;
+        var option = [annee_prec, annee];
+        var string = '<option>' + annee_prec + '</option><option selected="selected">' + annee + '</option>';
+        $('#donnee_mensuelle_annee').append(string);
+
+        //$('form[name=donnee_mensuelle]').submit();
+        $('#btn_add_donnee_mensuelle').on("click", function(ev){
+            ev.preventDefault();
+                var m = $('#donnee_mensuelle_mois').val();
+                var a = $('#donnee_mensuelle_annee').val();
+                var mois = m+"-"+a;
+                // alert(mois);
+                $.ajax({
+                    url : "/profile/tester_mois_dm/" + pseudo_hotel,
+                    type : "POST",
+                    data : {
+                        'mois' : mois,
+                    },
+                    success : function(response){
+                        if(response != "vide"){
+                            var choice = confirm("Ce mois admet déja un enregistrement.\nVoulez-vous emporter ce changement?");
+                            if(choice == true){
+                               
+                                $('form[name=donnee_mensuelle]').submit();
+                            }
+                        }
+                        else{
+                            
+                            $('form[name=donnee_mensuelle]').submit();
+                        }
+                    },
+                    error : function(){
+                        alert('erreur de ajax tester_mois_dm');
+                    }
+                })
+        })
+
+        // edit 
+
+        $(document).on('change', "#donnee_mensuelle_mois", function(){
+            var annee = $('#donnee_mensuelle_annee').val();
+            var mois = $(this).val() + "-" + annee;
+            var jqxhr = $.post( "/profile/tester_mois_dm/" + pseudo_hotel, {'mois' : mois}, function(response) {
+                if(response != "vide"){
+                    window.location.href = "/profile/edit_donnee_mensuelle/" + pseudo_hotel + "/" + response;
+                }
+                else{
+                    var inputs = document.querySelectorAll('form input');
+                    for (let index = 0; index < inputs.length; index++) {
+                         if(inputs[index].getAttribute('id') != "donnee_mensuelle__token"){
+                            inputs[index].value = "";
+                        }
+                    }
+                }
+            })
+        })
+
+        
+        
+    });
+</script>
+
+
+
+{% endblock %}
