@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\DonneeDuJour;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -34,6 +35,21 @@ class DonneeDuJourRepository extends ServiceEntityRepository
             ->orderBy('d.createdAt', 'DESC')
             ->getQuery()
         ;
+    }
+    /**
+     * @return DonneeDuJour[]
+     */
+    public function apiFindAll(EntityManagerInterface $em)
+    {
+       $query = $em->createQueryBuilder();
+       $query->select("h.id AS hotel_id, h.nom As hotel_nom, d.heb_ca, d.res_ca, d.spa_ca, d.createdAt")
+       ->from(" App\Entity\DonneeDuJour ", "d");
+       $query->join("d.hotel", "h");
+
+       $result = $query->getQuery()->getResult();
+       //dd($result);
+       return $result;
+       
     }
 
     /**
